@@ -60,20 +60,23 @@ const formatters : { [x: string]: (str : string) => string } = {
     'underline': (str: string) => color.underline(str),
 };
 
-function format(color: (str : string) => string, s : string, formatter : string) {
-    let format = formatters[formatter]
-    return format ? format(color(s)) : color(s);
+function format(col: (str : string) => string, s : string, formatter : string): string {
+    let form = formatters[formatter]
+    if (form) {
+       return form(col(s))
+    }
+    return col(s)
 };
 
 export function badges(label = '', msg = '', msgBg = 'blue', labelBg = 'black', msgColor = 'white', labelColor = 'white', msgStyle = '', labelStyle = '', msgWidth = 0, labelWidth = 0) {
-    /*
-    const lblColorer = getLabel(getBg(labelBg));
-    const msgColorer = getLabel(getBg(msgBg));
-    const labelformat = format(colortypes[labelBg], padd(label, labelWidth), labelStyle)
-    const msgformat = format(colortypes[msgBg], padd(label, msgWidth), msgStyle)
+    
+    const lblColorer = getLabel(getBg(labelBg)(label));
+    const msgColorer = getLabel(getBg(msgBg)(msg));
+    const labelformat = format(lblColorer, padd(label, labelWidth), labelStyle)
+    const msgformat = format(msgColorer, padd(label, msgWidth), msgStyle)
 
     return `${label && labelformat}${msg && msgformat} `
-    */
+  
 };
 
 console.log(badges('hello','world'))

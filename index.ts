@@ -72,6 +72,7 @@ export function badges(label = '', msg = '', msgBg = 'blue', labelBg = 'black', 
     
     const lblColorer = getLabel(getBg(labelBg)(label));
     const msgColorer = getLabel(getBg(msgBg)(msg));
+    
     const labelformat = format(lblColorer, padd(label, labelWidth), labelStyle)
     const msgformat = format(msgColorer, padd(label, msgWidth), msgStyle)
 

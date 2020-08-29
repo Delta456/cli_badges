@@ -22,6 +22,10 @@ console.log(badges('success', '2', {msgBg: 'green'}))
 console.log(badges('skipped', '2', {msgBg: 'yellow'}))
 ```
 
+## Output
+
+![sample_output](img/sample_output.png)
+
 ## `badges` function
 
 `badges` function accepts the following arguments:
@@ -47,7 +51,7 @@ interface BadgeOptions {
 
 ## Available Options
 
-### Forground Colors
+### Foreground Colors
 
 - `black`
 - `red`
@@ -89,4 +93,4 @@ I thank the author of [nombrekeff/cli-badges](https://github.com/nombrekeff/cli-
 
 ## License
 
-Licensed under [MIT](LICENSE)
+Licensed under [MIT](LICENSE).

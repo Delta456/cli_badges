@@ -1,7 +1,7 @@
 //const color = require('cli-color');
 ///const terminalLink = require('terminal-link');
 
-import * as color from 'https://deno.land/std@0.66.0/fmt/colors.ts';
+import * as color from "https://deno.land/std@0.66.0/fmt/colors.ts";
 
 type ColorType = { [x: string]: (str: string) => string };
 
@@ -51,13 +51,13 @@ function padd(str: string, width: number | undefined): string {
   if (!width) width = str.length + 2; // one space on each side
 
   const halfWith = Math.ceil((width - str.length) / 2);
-  const paddStr = ' '.repeat(halfWith);
+  const paddStr = " ".repeat(halfWith);
 
   return `${paddStr}${str}${paddStr}`;
 }
 
 function getBgColor(
-  colr: string | undefined
+  colr: string | undefined,
 ): (str: string) => string {
   if (!colr) {
     return color.bgBlue;
@@ -66,7 +66,7 @@ function getBgColor(
 }
 
 function getTextColor(
-  colr: string | undefined
+  colr: string | undefined,
 ): (str: string) => string {
   if (!colr) {
     return color.bgBlue;
@@ -76,7 +76,7 @@ function getTextColor(
 
 function format(
   str: string,
-  formatterName: string | undefined
+  formatterName: string | undefined,
 ): string {
   if (!formatterName) return str;
 
@@ -88,16 +88,16 @@ function format(
 }
 
 export const DEFAULT_OPTIONS: BadgeOptions = {
-  msgBg: 'blue',
-  labelBg: 'black',
-  msgColor: 'white',
-  labelColor: 'white',
+  msgBg: "blue",
+  labelBg: "black",
+  msgColor: "white",
+  labelColor: "white",
 };
 
 export function badges(
-  label = '',
-  msg = '',
-  opts: BadgeOptions = DEFAULT_OPTIONS
+  label = "",
+  msg = "",
+  opts: Partial<BadgeOptions> = DEFAULT_OPTIONS,
 ) {
   const {
     labelBg,
@@ -114,10 +114,10 @@ export function badges(
   const msgStr = padd(msg, msgWidth);
 
   const lblColored = getTextColor(labelColor)(
-    getBgColor(labelBg)(lblStr)
+    getBgColor(labelBg)(lblStr),
   );
   const msgColored = getTextColor(msgColor)(
-    getBgColor(msgBg)(msgStr)
+    getBgColor(msgBg)(msgStr),
   );
 
   const labelformat = format(lblColored, labelStyle);
@@ -125,5 +125,3 @@ export function badges(
 
   return `${label && labelformat}${msg && msgformat} `;
 }
-
-console.log(badges('hello', 'world'));

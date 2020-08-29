@@ -4,7 +4,7 @@ Generate Badges for your CLI.
 
 ## Features
 - Make Beautiful Badges in CLI
-- Works with all terminals
+- Works across all terminals
 - Link support (soon)
 - Variety of colors to choose from
 - Written in TS with Deno
@@ -13,13 +13,13 @@ Generate Badges for your CLI.
 ## Usage
 
 ```ts
-import { badges } from "https://deno.land/x/cli_badges@v0.0.2/index.ts";
+import { badges } from "https://deno.land/x/cli_badges@v0.0.3/index.ts";
 
-console.log(badges('failed', '2', {msgBg: 'red'}))
+console.log(badges('failed', '2', {msgBg: "red"}))
 
-console.log(badges('success', '2', {msgBg: 'green'}))
+console.log(badges('success', '2', {msgBg: "green"}))
 
-console.log(badges('skipped', '2', {msgBg: 'yellow'}))
+console.log(badges('skipped', '2', { msgBg: "yellow"}))
 ```
 
 ## Output
@@ -39,13 +39,13 @@ console.log(badges('skipped', '2', {msgBg: 'yellow'}))
 ```ts
 interface BadgeOptions {
   msgBg: string; // default is blue
-  labelBg: string; // default is black
+  labelBg: string; // default is brightBlack
   msgColor: string; // default is white
   labelColor: string; // default is white
-  msgStyle?: string;
-  labelStyle?: string;
-  msgWidth?: number;
-  labelWidth?: number;
+  msgStyle?: string; // default is null
+  labelStyle?: string; // default is null
+  msgWidth?: number; // default is msg length + 2
+  labelWidth?: number; //default is label length + 2
 }
 ```
 
@@ -61,7 +61,14 @@ interface BadgeOptions {
 - `magenta`
 - `cyan`
 - `white`
-- `gray`
+- `brightBlack`
+- `brightRed`
+- `brightBlue`
+- `brightGreen`
+- `brightYellow`
+- `brightMagenta`
+- `brightCyan`
+- `brightWhite`
 
 Custom color support coming soon
 
@@ -75,6 +82,14 @@ Custom color support coming soon
 - `magenta`
 - `cyan`
 - `white`
+- `brightBlack`
+- `brightRed`
+- `brightBlue`
+- `brightGreen`
+- `brightYellow`
+- `brightMagenta`
+- `brightCyan`
+- `brightWhite`
 
 Custom color support coming soon
 

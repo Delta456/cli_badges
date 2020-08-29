@@ -1,7 +1,4 @@
-//const color = require('cli-color');
-///const terminalLink = require('terminal-link');
-
-import * as color from "https://deno.land/std@0.66.0/fmt/colors.ts";
+import * as color from "https://deno.land/std@0.67.0/fmt/colors.ts";
 
 type ColorType = { [x: string]: (str: string) => string };
 
@@ -25,6 +22,14 @@ const colorBgTypes: ColorType = {
   magenta: (str: string) => color.bgMagenta(str),
   cyan: (str: string) => color.bgCyan(str),
   white: (str: string) => color.bgWhite(str),
+  brightBlack: (str: string) => color.bgBrightBlack(str),
+  brightRed: (str: string) => color.bgBrightRed(str),
+  brightBlue: (str: string) => color.bgBrightBlue(str),
+  brightGreen: (str: string) => color.bgBrightGreen(str),
+  brightYellow: (str: string) => color.bgBrightYellow(str),
+  brightMagenta: (str: string) => color.bgBrightMagenta(str),
+  brightCyan: (str: string) => color.bgBrightCyan(str),
+  brightWhite: (str: string) => color.bgBrightWhite(str),
 };
 
 const colorTypes: ColorType = {
@@ -36,7 +41,14 @@ const colorTypes: ColorType = {
   magenta: (str: string) => color.magenta(str),
   cyan: (str: string) => color.cyan(str),
   white: (str: string) => color.white(str),
-  gray: (str: string) => color.gray(str),
+  brightBlack: (str: string) => color.brightBlack(str),
+  brightRed: (str: string) => color.brightRed(str),
+  brightBlue: (str: string) => color.brightBlue(str),
+  brightGreen: (str: string) => color.brightGreen(str),
+  brightYellow: (str: string) => color.brightYellow(str),
+  brightMagenta: (str: string) => color.brightMagenta(str),
+  brightCyan: (str: string) => color.brightCyan(str),
+  brightWhite: (str: string) => color.brightWhite(str),
 };
 
 const formatters: ColorType = {
@@ -61,7 +73,7 @@ function getBgColor(
   colr: string | undefined,
 ): (str: string) => string {
   if (!colr) {
-    return color.bgBlue;
+    return color.bgBrightBlack;
   }
   return colorBgTypes[colr];
 }
@@ -70,7 +82,7 @@ function getTextColor(
   colr: string | undefined,
 ): (str: string) => string {
   if (!colr) {
-    return color.bgBlue;
+    return color.blue;
   }
   return colorTypes[colr];
 }
@@ -90,7 +102,7 @@ function format(
 
 export const DEFAULT_OPTIONS: BadgeOptions = {
   msgBg: "blue",
-  labelBg: "black",
+  labelBg: "brightBlack",
   msgColor: "white",
   labelColor: "white",
 };

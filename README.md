@@ -13,7 +13,7 @@ Generate Badges for your CLI.
 ## Usage
 
 ```ts
-import { badges } from "https://deno.land/x/cli_badges@v0.0.1/index.ts";
+import { badges } from "https://deno.land/x/cli_badges@v0.0.2/index.ts";
 
 console.log(badges('failed', '2', {msgBg: 'red'}))
 

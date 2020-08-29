@@ -36,6 +36,7 @@ const colorTypes: ColorType = {
   magenta: (str: string) => color.magenta(str),
   cyan: (str: string) => color.cyan(str),
   white: (str: string) => color.white(str),
+  gray: (str: string) => color.gray(str),
 };
 
 const formatters: ColorType = {

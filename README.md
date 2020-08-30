@@ -2,12 +2,15 @@
 
 Generate Badges for your CLI.
 
+[![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/cli_badges)  [![deno version](https://img.shields.io/badge/deno-^1.3.2-lightgrey?logo=deno)](https://github.com/denoland/deno) [![GitHub release](https://img.shields.io/github/release/Delta456/cli_badges.svg)](https://github.com/Delta456/cli_badges/releases)
+
+
 ## Features
-- Make Beautiful Badges in CLI
-- Works across all terminals
-- Link support (soon)
-- Variety of colors to choose from
-- Written in TS with Deno
+- Make Beautiful Badges in CLI 🤩
+- Works across all terminals 🦄
+- Link support 🔜
+- Variety of colors to choose from 🎨
+- Written in TS with Deno 🦕
 - many more coming...
 
 ## Usage
@@ -45,7 +48,7 @@ interface BadgeOptions {
   msgStyle?: string; // default is null
   labelStyle?: string; // default is null
   msgWidth?: number; // default is msg length + 2
-  labelWidth?: number; //default is label length + 2
+  labelWidth?: number; // default is label length + 2
 }
 ```
 

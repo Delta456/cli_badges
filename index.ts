@@ -3,10 +3,10 @@ import * as color from "https://deno.land/std@0.67.0/fmt/colors.ts";
 type ColorType = { [x: string]: (str: string) => string };
 
 export interface BadgeOptions {
-  msgBg: string;
-  labelBg: string;
-  msgColor: string;
-  labelColor: string;
+  msgBg: string | number;
+  labelBg: string | number;
+  msgColor: string | number;
+  labelColor: string | number;
   msgStyle?: string;
   labelStyle?: string;
   msgWidth?: number;
@@ -70,7 +70,7 @@ function padd(str: string, width: number | undefined): string {
 }
 
 function getBgColor(
-  colr: string | undefined,
+  colr: string | undefined | number,
 ): (str: string) => string {
   if (!colr) {
     return color.bgBrightBlack;
@@ -126,12 +126,22 @@ export function badges(
   const lblStr = padd(label, labelWidth);
   const msgStr = padd(msg, msgWidth);
 
-  const lblColored = getTextColor(labelColor)(
-    getBgColor(labelBg)(lblStr),
-  );
+  
+  const lblColored = typeof labelColor == 'string' ? getTextColor(labelColor)(
+    typeof labelBg === "number" ? color.bgRgb24(lblStr, labelBg)  : getBgColor(lblStr)(lblStr),
+  ) : color.rgb24((typeof labelBg === "number" ?  color.rgb24(lblStr, labelBg) :getBgColor(labelBg)(lblStr)), labelColor);
+
+  const msgColored = typeof msgColor == 'string' ? getTextColor(msgColor)(
+    typeof msgBg === "number" ? color.bgRgb24(msgStr, msgBg) : getBgColor(msgBg)(msgStr)
+  ) : color.rgb24((typeof msgBg === "number" ?  color.rgb24(msgStr, msgBg) :getBgColor(msgBg)(msgStr)), msgColor);
+/*
   const msgColored = getTextColor(msgColor)(
     getBgColor(msgBg)(msgStr),
   );
+  const lblColored = getTextColor(labelColor)(
+    getBgColor(labelBg)(lblStr),
+  );
+*/
 
   const labelformat = format(lblColored, labelStyle);
   const msgformat = format(msgColored, msgStyle);

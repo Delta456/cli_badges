@@ -157,5 +157,3 @@ export function badges(
 
   return `${label && labelformat}${msg && msgformat} `;
 }
-
-console.log(badges('hello', '5'))

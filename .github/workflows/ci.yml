@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-16.04
     strategy:
       matrix:
-        deno: ["v1.3.2", "nighty"]
+        deno: ["v1.3.2"]
     name: Deno ${{ matrix.deno }} sample
     steps:
       - uses: actions/checkout@v2

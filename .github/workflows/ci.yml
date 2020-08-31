@@ -1,0 +1,27 @@
+name: CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, synchronize]
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        deno: ["v1.3.2"]
+    name: Deno ${{ matrix.deno }} sample
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: ${{ matrix.deno }}
+      - name: Check formatted codebase 
+        run: |
+          deno fmt --check examples/
+          deno fmt --check index.ts
+      - name: Run examples/
+        run: |
+          deno run examples/simple.ts
+          deno run examples/custom.ts

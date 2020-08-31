@@ -1,14 +1,33 @@
 import * as color from "https://deno.land/std@0.67.0/fmt/colors.ts";
 
-type ColorType = { [x: string]: (str: string) => string };
+type Color =
+  | "black"
+  | "red"
+  | "blue"
+  | "green"
+  | "yellow"
+  | "magenta"
+  | "cyan"
+  | "white"
+  | "brightBlack"
+  | "brightRed"
+  | "brightBlue"
+  | "brightGreen"
+  | "brightYellow"
+  | "brightMagenta"
+  | "brightCyan"
+  | "brightWhite";
+type Format = "italic" | "underline" | "bold" | "inverse" | "dim" | "strike";
+type ColorType = { [c in Color]: (str: string) => string };
+type FormatType = { [format in Format]: (str: string) => string };
 
 export interface BadgeOptions {
-  msgBg: string;
-  labelBg: string;
-  msgColor: string;
-  labelColor: string;
-  msgStyle?: string;
-  labelStyle?: string;
+  msgBg: Color;
+  labelBg: Color;
+  msgColor: Color;
+  labelColor: Color;
+  msgStyle?: Format;
+  labelStyle?: Format;
   msgWidth?: number;
   labelWidth?: number;
 }
@@ -51,7 +70,7 @@ const colorTypes: ColorType = {
   brightWhite: (str: string) => color.brightWhite(str),
 };
 
-const formatters: ColorType = {
+const formatters: FormatType = {
   bold: (str: string) => color.bold(str),
   italic: (str: string) => color.italic(str),
   inverse: (str: string) => color.inverse(str),
@@ -60,7 +79,7 @@ const formatters: ColorType = {
   underline: (str: string) => color.underline(str),
 };
 
-function padd(str: string, width: number | undefined): string {
+function padd(str: string, width?: number): string {
   if (!width) width = str.length + 2; // one space on each side
 
   const halfWith = Math.ceil((width - str.length) / 2);
@@ -70,7 +89,7 @@ function padd(str: string, width: number | undefined): string {
 }
 
 function getBgColor(
-  colr: string | undefined,
+  colr?: Color,
 ): (str: string) => string {
   if (!colr) {
     return color.bgBrightBlack;
@@ -79,17 +98,17 @@ function getBgColor(
 }
 
 function getTextColor(
-  colr: string | undefined,
+  colr?: Color,
 ): (str: string) => string {
   if (!colr) {
-    return color.blue;
+    return color.white;
   }
   return colorTypes[colr];
 }
 
 function format(
   str: string,
-  formatterName: string | undefined,
+  formatterName?: Format,
 ): string {
   if (!formatterName) return str;
 
@@ -126,11 +145,11 @@ export function badges(
   const lblStr = padd(label, labelWidth);
   const msgStr = padd(msg, msgWidth);
 
-  const lblColored = getTextColor(labelColor)(
-    getBgColor(labelBg)(lblStr),
-  );
   const msgColored = getTextColor(msgColor)(
     getBgColor(msgBg)(msgStr),
+  );
+  const lblColored = getTextColor(labelColor)(
+    getBgColor(labelBg)(lblStr),
   );
 
   const labelformat = format(lblColored, labelStyle);

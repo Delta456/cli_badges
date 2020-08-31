@@ -2,7 +2,7 @@
 
 Generate Badges for your CLI.
 
-[![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/cli_badges)  [![deno version](https://img.shields.io/badge/deno-^1.3.2-lightgrey?logo=deno)](https://github.com/denoland/deno) [![GitHub release](https://img.shields.io/github/release/Delta456/cli_badges.svg)](https://github.com/Delta456/cli_badges/releases)
+[![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/cli_badges)  [![deno version](https://img.shields.io/badge/deno-^1.3.2-lightgrey?logo=deno)](https://github.com/denoland/deno) [![GitHub release](https://img.shields.io/github/release/Delta456/cli_badges.svg)](https://github.com/Delta456/cli_badges/releases) [![GitHub Actions](https://github.com/Delta456/box-cli-maker/workflows/cli%20badges/badge.svg)](https://github.com/Delta456/cli_badges/actions?query=workflow%3ACI)
 
 
 ## Features
@@ -16,7 +16,7 @@ Generate Badges for your CLI.
 ## Usage
 
 ```ts
-import { badges } from "https://deno.land/x/cli_badges@v0.0.3/index.ts";
+import { badges } from "https://deno.land/x/cli_badges@v0.0.4/index.ts";
 
 console.log(badges('failed', '2', {msgBg: "red"}))
 

@@ -1,6 +1,7 @@
 import * as color from "https://deno.land/std@0.67.0/fmt/colors.ts";
 
 type Color =
+  | number
   | "black"
   | "red"
   | "blue"
@@ -94,6 +95,9 @@ function getBgColor(
   if (!colr) {
     return color.bgBrightBlack;
   }
+  if (typeof colr === "number") {
+    return (str: string) => color.bgRgb24(str, colr);
+  }
   return colorBgTypes[colr];
 }
 
@@ -102,6 +106,9 @@ function getTextColor(
 ): (str: string) => string {
   if (!colr) {
     return color.white;
+  }
+  if (typeof colr === "number") {
+    return (str: string) => color.rgb24(str, colr);
   }
   return colorTypes[colr];
 }
@@ -119,7 +126,7 @@ function format(
   return str;
 }
 
-export const DEFAULT_OPTIONS: BadgeOptions = {
+export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
   msgBg: "blue",
   labelBg: "brightBlack",
   msgColor: "white",
@@ -145,12 +152,22 @@ export function badges(
   const lblStr = padd(label, labelWidth);
   const msgStr = padd(msg, msgWidth);
 
-  const msgColored = getTextColor(msgColor)(
-    getBgColor(msgBg)(msgStr),
-  );
-  const lblColored = getTextColor(labelColor)(
-    getBgColor(labelBg)(lblStr),
-  );
+  let msgColored: string, lblColored: string;
+
+  if (!labelBg) {
+    lblColored = getTextColor(labelColor)(color.bgBrightBlack(lblStr));
+  } else {
+    lblColored = getTextColor(labelColor)(
+      getBgColor(labelBg)(lblStr),
+    );
+  }
+  if (!msgBg) {
+    msgColored = getTextColor(msgColor)(color.bgBlue(msgStr));
+  } else {
+    msgColored = getTextColor(msgColor)(
+      getBgColor(msgBg)(msgStr),
+    );
+  }
 
   const labelformat = format(lblColored, labelStyle);
   const msgformat = format(msgColored, msgStyle);

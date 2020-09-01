@@ -184,3 +184,5 @@ export function badges(
 
   return `${label && labelformat}${msg && msgformat} `;
 }
+
+console.log(badges('hello', '5', {labelBg: 0x03324a, labelColor: 'cyan', msgBg: 0x245f6ab, msgColor: 'red'}))

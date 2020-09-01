@@ -96,7 +96,7 @@ interface BadgeOptions {
 
 Custom Colors are available and can be used for `msgBg`, `labelmsg`, `msgColor` and `labelColor` only. There are options to make `8 bit` and `24 bit` colors respectively. Set `is_8bit` to true if you want custom 8 bit RGB colors else it will be set to 24 bit RBG colors by default.
 
-**NOTE**: `24 bit` Colors need to be in a range of `0x000000` and `0xffffff` and `8 bit` Colors in a range of `0x0` and `0xFF`.
+**NOTE**: `24 bit` Colors **must** be in a range of `0x000000` and `0xffffff` and `8 bit` Colors **must** in a range of `0x0` and `0xFF`.
 
 ### Styles
 

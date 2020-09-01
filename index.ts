@@ -91,14 +91,15 @@ function padd(str: string, width?: number): string {
 }
 
 function getBgColor(
-  colr?: Color, is_8bit?: boolean
+  colr?: Color,
+  is_8bit?: boolean,
 ): (str: string) => string {
   if (!colr) {
     return color.bgBrightBlack;
   }
   if (typeof colr === "number") {
     if (is_8bit) {
-      return (str: string) => color.bgRgb8(str, colr)
+      return (str: string) => color.bgRgb8(str, colr);
     }
     return (str: string) => color.bgRgb24(str, colr);
   }
@@ -106,14 +107,15 @@ function getBgColor(
 }
 
 function getTextColor(
-  colr?: Color, is_8bit?: boolean
+  colr?: Color,
+  is_8bit?: boolean,
 ): (str: string) => string {
   if (!colr) {
     return color.white;
   }
   if (typeof colr === "number") {
     if (is_8bit) {
-      return (str: string) => color.rgb8(str, colr)
+      return (str: string) => color.rgb8(str, colr);
     }
     return (str: string) => color.rgb24(str, colr);
   }
@@ -154,7 +156,7 @@ export function badges(
     msgColor,
     msgBg,
     msgStyle,
-    is_8bit
+    is_8bit,
   } = opts;
 
   const lblStr = padd(label, labelWidth);

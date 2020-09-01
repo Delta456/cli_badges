@@ -31,6 +31,7 @@ export interface BadgeOptions {
   labelStyle?: Format;
   msgWidth?: number;
   labelWidth?: number;
+  is_8bit?: boolean;
 }
 
 const colorBgTypes: ColorType = {
@@ -90,24 +91,30 @@ function padd(str: string, width?: number): string {
 }
 
 function getBgColor(
-  colr?: Color,
+  colr?: Color, is_8bit?: boolean
 ): (str: string) => string {
   if (!colr) {
     return color.bgBrightBlack;
   }
   if (typeof colr === "number") {
+    if (is_8bit) {
+      return (str: string) => color.bgRgb8(str, colr)
+    }
     return (str: string) => color.bgRgb24(str, colr);
   }
   return colorBgTypes[colr];
 }
 
 function getTextColor(
-  colr?: Color,
+  colr?: Color, is_8bit?: boolean
 ): (str: string) => string {
   if (!colr) {
     return color.white;
   }
   if (typeof colr === "number") {
+    if (is_8bit) {
+      return (str: string) => color.rgb8(str, colr)
+    }
     return (str: string) => color.rgb24(str, colr);
   }
   return colorTypes[colr];
@@ -147,6 +154,7 @@ export function badges(
     msgColor,
     msgBg,
     msgStyle,
+    is_8bit
   } = opts;
 
   const lblStr = padd(label, labelWidth);
@@ -155,17 +163,17 @@ export function badges(
   let msgColored: string, lblColored: string;
 
   if (!labelBg) {
-    lblColored = getTextColor(labelColor)(color.bgBrightBlack(lblStr));
+    lblColored = getTextColor(labelColor, is_8bit)(color.bgBrightBlack(lblStr));
   } else {
-    lblColored = getTextColor(labelColor)(
-      getBgColor(labelBg)(lblStr),
+    lblColored = getTextColor(labelColor, is_8bit)(
+      getBgColor(labelBg, is_8bit)(lblStr),
     );
   }
   if (!msgBg) {
-    msgColored = getTextColor(msgColor)(color.bgBlue(msgStr));
+    msgColored = getTextColor(msgColor, is_8bit)(color.bgBlue(msgStr));
   } else {
-    msgColored = getTextColor(msgColor)(
-      getBgColor(msgBg)(msgStr),
+    msgColored = getTextColor(msgColor, is_8bit)(
+      getBgColor(msgBg, is_8bit)(msgStr),
     );
   }
 

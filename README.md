@@ -48,6 +48,7 @@ interface BadgeOptions {
   labelStyle?: string; // default is null
   msgWidth?: number; // default is msg length + 2
   labelWidth?: number; // default is label length + 2
+  is_8bit?: boolean; // default is false as it uses 24 bits
 }
 ```
 
@@ -72,8 +73,6 @@ interface BadgeOptions {
 - `brightCyan`
 - `brightWhite`
 
-Custom color support coming soon
-
 ### Background Colors
 
 - `black`
@@ -93,7 +92,11 @@ Custom color support coming soon
 - `brightCyan`
 - `brightWhite`
 
-Custom color support coming soon
+### Custom Colors
+
+Custom Colors are available and can be used for `msgBg`, `labelmsg`, `msgColor` and `labelColor` only. There are options to make `8 bit` and `24 bit` colors respectively. Set `is_8bit` to true if you want custom 8 bit RGB colors else it will be 24 bit RBG colors by default.
+
+**NOTE**: `24 bit` Colors need to be in a range of `0x000000` and `0xffffff` and `8 bit` Colors in a range of `0x0` and `0xFF`.
 
 ### Styles
 

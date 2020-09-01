@@ -1,6 +1,7 @@
 import * as color from "https://deno.land/std@0.67.0/fmt/colors.ts";
 
 type Color =
+  | number
   | "black"
   | "red"
   | "blue"
@@ -30,6 +31,7 @@ export interface BadgeOptions {
   labelStyle?: Format;
   msgWidth?: number;
   labelWidth?: number;
+  is_8bit?: boolean;
 }
 
 const colorBgTypes: ColorType = {
@@ -90,18 +92,32 @@ function padd(str: string, width?: number): string {
 
 function getBgColor(
   colr?: Color,
+  is_8bit?: boolean,
 ): (str: string) => string {
   if (!colr) {
     return color.bgBrightBlack;
+  }
+  if (typeof colr === "number") {
+    if (is_8bit) {
+      return (str: string) => color.bgRgb8(str, colr);
+    }
+    return (str: string) => color.bgRgb24(str, colr);
   }
   return colorBgTypes[colr];
 }
 
 function getTextColor(
   colr?: Color,
+  is_8bit?: boolean,
 ): (str: string) => string {
   if (!colr) {
     return color.white;
+  }
+  if (typeof colr === "number") {
+    if (is_8bit) {
+      return (str: string) => color.rgb8(str, colr);
+    }
+    return (str: string) => color.rgb24(str, colr);
   }
   return colorTypes[colr];
 }
@@ -119,7 +135,7 @@ function format(
   return str;
 }
 
-export const DEFAULT_OPTIONS: BadgeOptions = {
+export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
   msgBg: "blue",
   labelBg: "brightBlack",
   msgColor: "white",
@@ -140,17 +156,28 @@ export function badges(
     msgColor,
     msgBg,
     msgStyle,
+    is_8bit,
   } = opts;
 
   const lblStr = padd(label, labelWidth);
   const msgStr = padd(msg, msgWidth);
 
-  const msgColored = getTextColor(msgColor)(
-    getBgColor(msgBg)(msgStr),
-  );
-  const lblColored = getTextColor(labelColor)(
-    getBgColor(labelBg)(lblStr),
-  );
+  let msgColored: string, lblColored: string;
+
+  if (!labelBg) {
+    lblColored = getTextColor(labelColor, is_8bit)(color.bgBrightBlack(lblStr));
+  } else {
+    lblColored = getTextColor(labelColor, is_8bit)(
+      getBgColor(labelBg, is_8bit)(lblStr),
+    );
+  }
+  if (!msgBg) {
+    msgColored = getTextColor(msgColor, is_8bit)(color.bgBlue(msgStr));
+  } else {
+    msgColored = getTextColor(msgColor, is_8bit)(
+      getBgColor(msgBg, is_8bit)(msgStr),
+    );
+  }
 
   const labelformat = format(lblColored, labelStyle);
   const msgformat = format(msgColored, msgStyle);

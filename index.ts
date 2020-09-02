@@ -32,7 +32,7 @@ export interface BadgeOptions {
   msgWidth?: number;
   labelWidth?: number;
   is_8bit?: boolean;
-  hyper_link?: string,
+  hyper_link?: string;
 }
 
 const colorBgTypes: ColorType = {

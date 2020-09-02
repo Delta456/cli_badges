@@ -22,6 +22,20 @@ type Format = "italic" | "underline" | "bold" | "inverse" | "dim" | "strike";
 type ColorType = { [c in Color]: (str: string) => string };
 type FormatType = { [format in Format]: (str: string) => string };
 
+/** 
+ * BadgeOptions is an interface which is configuartion 
+ * for the formation of the `badge`.
+ * @property msgBg - Bg of the msg. Default: `brightBlack`.
+ * @property labelBg - Bg of the label. Default: `blue`.
+ * @property msgColor - Text Color of the msg. Default: `white`.
+ * @property labelColor - Text Color of the label. Default: `white`.
+ * @property msgStyle - Style of the msg. Default: `null`.
+ * @property labelStyle - Style of the label. Default: `null`.
+ * @property msgWidth - Width of the msg. Default: `msg.length + 2`.
+ * @property labelWidth - Width of the label. Default: `label.length + 2`.
+ * @property is_8bit - Flag for allowing 8 bit Colors. Default: `false`.
+ * @property hyper_link - Hyperlink of the badge. Default: `null`.
+*/
 export interface BadgeOptions {
   msgBg: Color;
   labelBg: Color;
@@ -98,10 +112,13 @@ function getBgColor(
   if (!colr) {
     return color.bgBrightBlack;
   }
+  // needed for custom 24 bit and 8 bit RBG Colors
   if (typeof colr === "number") {
+    // no limit check as color.bgRbg8 handles it
     if (is_8bit) {
       return (str: string) => color.bgRgb8(str, colr);
     }
+    // no limit check as color.bgRbg24 handles it
     return (str: string) => color.bgRgb24(str, colr);
   }
   return colorBgTypes[colr];
@@ -114,10 +131,13 @@ function getTextColor(
   if (!colr) {
     return color.white;
   }
+  // needed for custom 24 bit and 8 bit RBG Colors
   if (typeof colr === "number") {
+    // no limit check as color.rbg8 handles it
     if (is_8bit) {
       return (str: string) => color.rgb8(str, colr);
     }
+    // no limit check as color.bgRbg24 handles it
     return (str: string) => color.rgb24(str, colr);
   }
   return colorTypes[colr];
@@ -136,10 +156,11 @@ function format(
   return str;
 }
 
-function hyperlink(url: string , text: string) : string {
-  return `\u001B]8;;${url}\u0007${text}\u001B]8;;\u0007`
+function hyperlink(url: string, text: string): string {
+  return `\u001B]8;;${url}\u0007${text}\u001B]8;;\u0007`;
 }
 
+// default options passed
 export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
   msgBg: "blue",
   labelBg: "brightBlack",
@@ -147,6 +168,7 @@ export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
   labelColor: "white",
 };
 
+/** badges returns the `string` repr of the `badge` */
 export function badges(
   label = "",
   msg = "",
@@ -169,7 +191,7 @@ export function badges(
   const msgStr = padd(msg, msgWidth);
 
   let msgColored: string, lblColored: string;
-
+  // needs to be checked for safety
   if (!labelBg) {
     lblColored = getTextColor(labelColor, is_8bit)(color.bgBrightBlack(lblStr));
   } else {
@@ -187,7 +209,7 @@ export function badges(
 
   const labelformat = format(lblColored, labelStyle);
   const msgformat = format(msgColored, msgStyle);
-  const badge = `${label && labelformat}${msg && msgformat} `
-
-  return hyper_link ? hyperlink(hyper_link, badge): badge;
+  const badge = `${label && labelformat}${msg && msgformat} `;
+  // create hyperlink if provided
+  return hyper_link ? hyperlink(hyper_link, badge) : badge;
 }

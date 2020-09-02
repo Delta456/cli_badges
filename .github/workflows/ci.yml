@@ -25,3 +25,5 @@ jobs:
         run: |
           deno run examples/simple.ts
           deno run examples/medium.ts
+          deno run examples/custom.ts
+          deno run examples/8_bit.ts

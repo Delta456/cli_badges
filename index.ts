@@ -32,6 +32,7 @@ export interface BadgeOptions {
   msgWidth?: number;
   labelWidth?: number;
   is_8bit?: boolean;
+  hyper_link?: string,
 }
 
 const colorBgTypes: ColorType = {
@@ -135,6 +136,10 @@ function format(
   return str;
 }
 
+function hyperlink(url: string , text: string) : string {
+  return `\u001B]8;;${url}\u0007${text}\u001B]8;;\u0007`
+}
+
 export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
   msgBg: "blue",
   labelBg: "brightBlack",
@@ -157,6 +162,7 @@ export function badges(
     msgBg,
     msgStyle,
     is_8bit,
+    hyper_link,
   } = opts;
 
   const lblStr = padd(label, labelWidth);
@@ -181,6 +187,7 @@ export function badges(
 
   const labelformat = format(lblColored, labelStyle);
   const msgformat = format(msgColored, msgStyle);
+  const badge = `${label && labelformat}${msg && msgformat} `
 
-  return `${label && labelformat}${msg && msgformat} `;
+  return hyper_link ? hyperlink(hyper_link, badge): badge;
 }

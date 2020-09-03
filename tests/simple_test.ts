@@ -6,7 +6,8 @@ import {
 
 Deno.test("Only Label", function (): void {
   assertEquals(
-    badges("hello"), "\u001b[37m\u001b[100m hello \u001b[49m\u001b[39m ",
+    badges("hello"),
+    "\u001b[37m\u001b[100m hello \u001b[49m\u001b[39m ",
   );
   // they may look the same but they are not!
   assertNotEquals(
@@ -64,13 +65,13 @@ Deno.test("Only Msg", function (): void {
 });
 
 Deno.test("Custom Badge", function (): void {
-    assertEquals(
-      badges("custom", "badge", { msgBg: "red", labelBg: 'yellow' }),
-      `\u001b[37m\u001b[43m custom \u001b[49m\u001b[39m\u001b[37m\u001b[41m badge \u001b[49m\u001b[39m `,
-    );
-    // they may look the same but they are not!
-    assertNotEquals(
-      badges("custom", "badge", { msgBg: "red", labelBg: 'yellow' }),
-      "\u001b[48;5;3m\u001b[38;5;15m custom \u001b[0m\u001b[0m\u001b[48;5;1m\u001b[38;5;15m badge \u001b[0m\u001b[0m ",
-    );
+  assertEquals(
+    badges("custom", "badge", { msgBg: "red", labelBg: "yellow" }),
+    `\u001b[37m\u001b[43m custom \u001b[49m\u001b[39m\u001b[37m\u001b[41m badge \u001b[49m\u001b[39m `,
+  );
+  // they may look the same but they are not!
+  assertNotEquals(
+    badges("custom", "badge", { msgBg: "red", labelBg: "yellow" }),
+    "\u001b[48;5;3m\u001b[38;5;15m custom \u001b[0m\u001b[0m\u001b[48;5;1m\u001b[38;5;15m badge \u001b[0m\u001b[0m ",
+  );
 });

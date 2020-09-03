@@ -51,6 +51,7 @@ interface BadgeOptions {
   msgWidth?: number; // default is msg length + 2
   labelWidth?: number; // default is label length + 2
   is_8bit?: boolean; // default is false as it uses 24 bits
+  hyper_link?: string; // hyperlink for the badge
 }
 ```
 
@@ -108,6 +109,10 @@ Custom Colors are available and can be used for `msgBg`, `labelmsg`, `msgColor` 
 - `dim`
 - `strike`
 - `underline`
+
+### Hyperlink Support
+
+Hyperlink is only supported on [some](https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda) terminals.
 
 ## Acknowledgments
 

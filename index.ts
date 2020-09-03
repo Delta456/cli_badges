@@ -23,7 +23,7 @@ type ColorType = { [c in Color]: (str: string) => string };
 type FormatType = { [format in Format]: (str: string) => string };
 
 /** 
- * BadgeOptions is an interface which is configuartion 
+ * @interface BadgeOptions is an interface which is configuartion 
  * for the formation of the `badge`.
  * @property msgBg - Bg of the msg. Default: `brightBlack`.
  * @property labelBg - Bg of the label. Default: `blue`.
@@ -168,7 +168,11 @@ export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
   labelColor: "white",
 };
 
-/** badges returns the `string` repr of the `badge` */
+/** badges returns the `string` repr of the `badge` 
+ * @param label - label of the badge.
+ * @param msg - message of the badge.
+ * @param opts - options for the configuration of the badge.
+*/
 export function badges(
   label = "",
   msg = "",

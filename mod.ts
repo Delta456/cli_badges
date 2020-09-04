@@ -1,6 +1,6 @@
 import * as color from "https://deno.land/std@0.67.0/fmt/colors.ts";
 
-type Color =
+export type Color =
   | number
   | "black"
   | "red"
@@ -18,9 +18,9 @@ type Color =
   | "brightMagenta"
   | "brightCyan"
   | "brightWhite";
-type Format = "italic" | "underline" | "bold" | "inverse" | "dim" | "strike";
-type ColorType = { [c in Color]: (str: string) => string };
-type FormatType = { [format in Format]: (str: string) => string };
+export type Format = "italic" | "underline" | "bold" | "inverse" | "dim" | "strike";
+export type ColorType = { [c in Color]: (str: string) => string };
+export type FormatType = { [format in Format]: (str: string) => string };
 
 /** 
  * @interface BadgeOptions is an interface which is configuartion 

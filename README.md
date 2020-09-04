@@ -4,24 +4,25 @@ Generate Badges for your CLI.
 
 [![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/cli_badges)  [![deno version](https://img.shields.io/badge/deno-^1.3.2-lightgrey?logo=deno)](https://github.com/denoland/deno) [![GitHub release](https://img.shields.io/github/release/Delta456/cli_badges.svg)](https://github.com/Delta456/cli_badges/releases) [![CI](https://github.com/Delta456/cli_badges/workflows/CI/badge.svg)](https://github.com/Delta456/cli_badges/actions?query=workflow%3ACI)
 
+**NOTE**: It is recommended to use update pre-exisiting versions of this module to `^v0.1.0` as there are many breaking changes from this release in the API.
+
 ## Features
-- Make Beautiful Badges in CLI 🤩
+- Make Beautiful Badges for CLI 🤩
 - Works across all terminals 🦄
-- Link support 🔜
+- Link support 🔗
 - Variety of colors to choose from 🎨
 - Written in TS with Deno 🦕
-- many more coming...
 
 ## Usage
 
 ```ts
-import { badges } from "https://deno.land/x/cli_badges@v0.0.5/index.ts";
+import { badge } from "https://deno.land/x/cli_badges@v0.1.0/mod.ts";
 
-console.log(badges("failed", "2", { msgBg: "red" }));
+console.log(badge("failed", "2", { msgBg: "red" }));
 
-console.log(badges("success", "2", { msgBg: "green" }));
+console.log(badge("success", "2", { msgBg: "green" }));
 
-console.log(badges("skipped", "2", { msgBg: "yellow" }));
+console.log(badge("skipped", "2", { msgBg: "yellow" }));
 ```
 
 ## Output
@@ -30,9 +31,9 @@ console.log(badges("skipped", "2", { msgBg: "yellow" }));
 
 See [examples](./examples/) for more usages
 
-## `badges` function
+## `badge` function
 
-`badges` function accepts the following arguments:
+`badge` function accepts the following arguments:
 
 - `label`: label of the badge
 - `msg`: message of the badge

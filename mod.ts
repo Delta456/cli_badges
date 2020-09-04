@@ -1,5 +1,6 @@
 import * as color from "https://deno.land/std@0.67.0/fmt/colors.ts";
 
+/** @type Color is the sum types of available colors */
 export type Color =
   | number
   | "black"
@@ -18,8 +19,20 @@ export type Color =
   | "brightMagenta"
   | "brightCyan"
   | "brightWhite";
-export type Format = "italic" | "underline" | "bold" | "inverse" | "dim" | "strike";
+
+/** @type Format is the sum types of available styles */
+export type Format =
+  | "italic"
+  | "underline"
+  | "bold"
+  | "inverse"
+  | "dim"
+  | "strike";
+
+/** @type ColorType is a map of @type Color and `(str:string) => string` */
 export type ColorType = { [c in Color]: (str: string) => string };
+
+/** @type FormatType is a map of @type Format and `(str:string) => string` */
 export type FormatType = { [format in Format]: (str: string) => string };
 
 /** 
@@ -96,6 +109,7 @@ const formatters: FormatType = {
   underline: (str: string) => color.underline(str),
 };
 
+/** @function padd returns the padded `string` according to `width` provided */
 function padd(str: string, width?: number): string {
   if (!width) width = str.length + 2; // one space on each side
 
@@ -105,6 +119,7 @@ function padd(str: string, width?: number): string {
   return `${paddStr}${str}${paddStr}`;
 }
 
+/** @function getBgColor gets the Bg color according to @type Color */
 function getBgColor(
   colr?: Color,
   is_8bit?: boolean,
@@ -124,6 +139,7 @@ function getBgColor(
   return colorBgTypes[colr];
 }
 
+/** @function getTextColor gets the text color according to @type Color */
 function getTextColor(
   colr?: Color,
   is_8bit?: boolean,
@@ -143,6 +159,7 @@ function getTextColor(
   return colorTypes[colr];
 }
 
+/** @function format formats the badge according to @type Format */
 function format(
   str: string,
   formatterName?: Format,
@@ -156,11 +173,12 @@ function format(
   return str;
 }
 
+/** @function hyperlink makes a hyperlink */
 function hyperlink(url: string, text: string): string {
   return `\u001B]8;;${url}\u0007${text}\u001B]8;;\u0007`;
 }
 
-// default options passed
+/** @var DEFAULT_OPTIONS are the default args passed to @function badge */
 export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
   msgBg: "blue",
   labelBg: "brightBlack",
@@ -168,10 +186,10 @@ export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
   labelColor: "white",
 };
 
-/** badge returns the `string` repr of the `badge` 
+/** @function badge returns the `string` repr of the `badge` 
  * @param label - label of the badge.
  * @param msg - message of the badge.
- * @param opts - options for the configuration of the badge.
+ * @param opts - options for the @interface BadgeOptions of the badge.
 */
 export function badge(
   label = "",

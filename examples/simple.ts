@@ -1,3 +1,3 @@
-import { badges } from "https://deno.land/x/cli_badges/index.ts";
+import { badge } from "../mod.ts";
 
-console.log(badges("counter", "5"));
+console.log(badge("counter", "5"));

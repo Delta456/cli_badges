@@ -1,4 +1,4 @@
-import { badges } from "https://deno.land/x/cli_badges@v0.0.5/index.ts";
+import { badge } from "../mod.ts";
 import {
   assertEquals,
   assertNotEquals,
@@ -23,7 +23,7 @@ const cases = [{
 
 for (const { name, options, output } of cases) {
   Deno.test(name, function () {
-    assertEquals(badges(options.label, options.msg), output);
+    assertEquals(badge(options.label, options.msg), output);
   });
 }
 
@@ -51,13 +51,13 @@ const color_cases: {
 
 for (const { name, options, output } of color_cases) {
   Deno.test(name, function (): void {
-    assertEquals(badges(options.label, options.msg, options.opts), output);
+    assertEquals(badge(options.label, options.msg, options.opts), output);
   });
 }
 
 Deno.test("Custom Badge", function (): void {
   assertEquals(
-    badges("custom", "badge", { msgBg: "red", labelBg: "yellow" }),
+    badge("custom", "badge", { msgBg: "red", labelBg: "yellow" }),
     `\u001b[37m\u001b[43m custom \u001b[49m\u001b[39m\u001b[37m\u001b[41m badge \u001b[49m\u001b[39m `,
   );
 });
@@ -65,23 +65,23 @@ Deno.test("Custom Badge", function (): void {
 Deno.test("Invalid Badges", function (): void {
   // they all may look the same but they are not!
   assertNotEquals(
-    badges("success", "5", { msgBg: "green" }),
+    badge("success", "5", { msgBg: "green" }),
     "\u001b[48;5;8m\u001b[38;5;15m success \u001b[0m\u001b[0m\u001b[48;5;2m\u001b[38;5;15m 5 \u001b[0m\u001b[0m ",
   );
   assertNotEquals(
-    badges("counter", "5"),
+    badge("counter", "5"),
     "\u001b[48;5;8m\u001b[38;5;15m counter \u001b[0m\u001b[0m\u001b[48;5;4m\u001b[38;5;15m 5 \u001b[0m\u001b[0m ",
   );
   assertNotEquals(
-    badges("fail", "5", { msgBg: "red" }),
+    badge("fail", "5", { msgBg: "red" }),
     "\u001b[48;5;8m\u001b[38;5;15m fail \u001b[0m\u001b[0m\u001b[48;5;1m\u001b[38;5;15m 5 \u001b[0m\u001b[0m ",
   );
   assertNotEquals(
-    badges("", "fail"),
+    badge("", "fail"),
     "\u001b[48;5;8m\u001b[38;5;15m\u001b[0m\u001b[0m\u001b[48;5;4m\u001b[38;5;15m fail \u001b[0m\u001b[0m",
   );
   assertNotEquals(
-    badges("custom", "badge", { msgBg: "red", labelBg: "yellow" }),
+    badge("custom", "badge", { msgBg: "red", labelBg: "yellow" }),
     "\u001b[48;5;3m\u001b[38;5;15m custom \u001b[0m\u001b[0m\u001b[48;5;1m\u001b[38;5;15m badge \u001b[0m\u001b[0m ",
   );
 });

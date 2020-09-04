@@ -168,12 +168,12 @@ export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
   labelColor: "white",
 };
 
-/** badges returns the `string` repr of the `badge` 
+/** badge returns the `string` repr of the `badge` 
  * @param label - label of the badge.
  * @param msg - message of the badge.
  * @param opts - options for the configuration of the badge.
 */
-export function badges(
+export function badge(
   label = "",
   msg = "",
   opts: Partial<BadgeOptions> = DEFAULT_OPTIONS,

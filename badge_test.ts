@@ -149,4 +149,101 @@ Deno.test("Italic", function (): void {
     badge("hello", "", { labelStyle: "italic" }),
     "\u001b[3m\u001b[37m\u001b[100m hello \u001b[49m\u001b[39m\u001b[23m ",
   );
+  assertEquals(
+    badge("hello", "world", { labelStyle: "italic", msgStyle: "italic" }),
+    "\u001b[3m\u001b[37m\u001b[100m hello \u001b[49m\u001b[39m\u001b[23m\u001b[3m\u001b[37m\u001b[44m world \u001b[49m\u001b[39m\u001b[23m ",
+  );
+  assertEquals(
+    badge(
+      "hello",
+      "world",
+      { labelStyle: "italic", msgStyle: "italic", msgBg: "cyan" },
+    ),
+    "\u001b[3m\u001b[37m\u001b[100m hello \u001b[49m\u001b[39m\u001b[23m\u001b[3m\u001b[37m\u001b[46m world \u001b[49m\u001b[39m\u001b[23m ",
+  );
+  assertEquals(
+    badge(
+      "hello",
+      "world",
+      {
+        labelStyle: "italic",
+        msgStyle: "italic",
+        msgBg: "cyan",
+        labelBg: "red",
+      },
+    ),
+    "\u001b[3m\u001b[37m\u001b[41m hello \u001b[49m\u001b[39m\u001b[23m\u001b[3m\u001b[37m\u001b[46m world \u001b[49m\u001b[39m\u001b[23m ",
+  );
+  assertEquals(
+    badge(
+      "hello",
+      "world",
+      {
+        labelStyle: "italic",
+        msgStyle: "italic",
+        msgBg: "cyan",
+        labelBg: "red",
+        labelColor: "magenta",
+      },
+    ),
+    "\u001b[3m\u001b[35m\u001b[41m hello \u001b[49m\u001b[39m\u001b[23m\u001b[3m\u001b[37m\u001b[46m world \u001b[49m\u001b[39m\u001b[23m ",
+  );
+  assertEquals(
+    badge(
+      "foo",
+      "bar",
+      {
+        labelStyle: "italic",
+        msgStyle: "italic",
+        msgBg: "cyan",
+        labelBg: "red",
+        labelColor: "magenta",
+        msgColor: "blue",
+      },
+    ),
+    "\u001b[3m\u001b[35m\u001b[41m foo \u001b[49m\u001b[39m\u001b[23m\u001b[3m\u001b[34m\u001b[46m bar \u001b[49m\u001b[39m\u001b[23m ",
+  );
+});
+
+Deno.test("Inverse", function (): void {
+  assertEquals(
+    badge("foo", "", { labelStyle: "inverse" }),
+    "\u001b[7m\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[27m ",
+  );
+  assertEquals(
+    badge("foo", "bar", { labelStyle: "inverse", msgStyle: "inverse" }),
+    "\u001b[7m\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[27m\u001b[7m\u001b[37m\u001b[44m bar \u001b[49m\u001b[39m\u001b[27m ",
+  );
+  assertEquals(
+    badge(
+      "foo",
+      "bar",
+      { labelStyle: "inverse", msgStyle: "inverse", labelBg: "red" },
+    ),
+    "\u001b[7m\u001b[37m\u001b[41m foo \u001b[49m\u001b[39m\u001b[27m\u001b[7m\u001b[37m\u001b[44m bar \u001b[49m\u001b[39m\u001b[27m ",
+  );
+  assertEquals(
+    badge(
+      "foo",
+      "bar",
+      {
+        labelStyle: "inverse",
+        msgStyle: "inverse",
+        labelBg: "red",
+        msgBg: "yellow",
+      },
+    ),
+    "\u001b[7m\u001b[37m\u001b[41m foo \u001b[49m\u001b[39m\u001b[27m\u001b[7m\u001b[37m\u001b[43m bar \u001b[49m\u001b[39m\u001b[27m ",
+  );
+});
+
+Deno.test("Hyperlink", function (): void {
+  assertEquals(
+    badge("foo", "", { hyper_link: "https://github.com/" }),
+    "\u001b]8;;https://github.com/\u0007\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m \u001b]8;;\u0007",
+  );
+  assertEquals(
+    badge("foo", "bar", { hyper_link: "https://github.com/" }),
+    "\u001b]8;;https://github.com/\u0007\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[37m\u001b[44m bar \u001b[49m\u001b[39m \u001b]8;;\u0007",
+  );
 });

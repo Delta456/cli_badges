@@ -21,9 +21,9 @@ jobs:
         run: |
           deno fmt --check examples/
           deno fmt --check index.ts
-          deno fmt --check tests/
+          deno fmt --check badge_test.ts
       - name: Run tests
-        run: deno test tests
+        run: deno test badge_test.ts
       - name: Run examples/
         run: |
           deno run examples/simple.ts

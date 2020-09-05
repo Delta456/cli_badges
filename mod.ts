@@ -20,8 +20,8 @@ export type Color =
   | "brightCyan"
   | "brightWhite";
 
-/** @type Format is the sum types of available styles */
-export type Format =
+/** @type Style is the sum types of available styles */
+export type Style =
   | "italic"
   | "underline"
   | "bold"
@@ -32,8 +32,8 @@ export type Format =
 /** @type ColorType is a map of @type Color and `(str:string) => string` */
 export type ColorType = { [c in Color]: (str: string) => string };
 
-/** @type FormatType is a map of @type Format and `(str:string) => string` */
-export type FormatType = { [format in Format]: (str: string) => string };
+/** @type StyleType is a map of @type Style and `(str:string) => string` */
+export type StyleType = { [s in Style]: (str: string) => string };
 
 /** 
  * @interface BadgeOptions is an interface which is configuartion 
@@ -54,8 +54,8 @@ export interface BadgeOptions {
   labelBg: Color;
   msgColor: Color;
   labelColor: Color;
-  msgStyle?: Format;
-  labelStyle?: Format;
+  msgStyle?: Style;
+  labelStyle?: Style;
   msgWidth?: number;
   labelWidth?: number;
   is_8bit?: boolean;
@@ -100,7 +100,7 @@ const colorTypes: ColorType = {
   brightWhite: (str: string) => color.brightWhite(str),
 };
 
-const formatters: FormatType = {
+const styleTypes: StyleType = {
   bold: (str: string) => color.bold(str),
   italic: (str: string) => color.italic(str),
   inverse: (str: string) => color.inverse(str),
@@ -159,16 +159,16 @@ function getTextColor(
   return colorTypes[colr];
 }
 
-/** @function format formats the badge according to @type Format */
+/** @function format formates the badge according to @type Style */
 function format(
   str: string,
-  formatterName?: Format,
+  StyleName?: Style,
 ): string {
-  if (!formatterName) return str;
+  if (!StyleName) return str;
 
-  const formatter = formatters[formatterName];
-  if (formatter) {
-    return formatter(str);
+  const Styleter = styleTypes[StyleName];
+  if (Styleter) {
+    return Styleter(str);
   }
   return str;
 }
@@ -229,9 +229,9 @@ export function badge(
     );
   }
 
-  const labelformat = format(lblColored, labelStyle);
-  const msgformat = format(msgColored, msgStyle);
-  const badge = `${label && labelformat}${msg && msgformat} `;
+  const label_Style = format(lblColored, labelStyle);
+  const msg_Style = format(msgColored, msgStyle);
+  const badge = `${label && label_Style}${msg && msg_Style} `;
   // create hyperlink if provided
   return hyper_link ? hyperlink(hyper_link, badge) : badge;
 }

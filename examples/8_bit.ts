@@ -1,4 +1,4 @@
-import { badge } from "../mod.ts"
+import { badge } from "../mod.ts";
 
 console.log(badge("RBG", "255", { msgBg: 230, is_8bit: true }), "\n");
 

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-16.04
     strategy:
       matrix:
-        deno: ["v1.3.2"]
+        deno: ["v1.3.2", "v1.3.3"]
     name: Deno ${{ matrix.deno }} sample
     steps:
       - uses: actions/checkout@v2
@@ -19,9 +19,12 @@ jobs:
           deno-version: ${{ matrix.deno }}
       - name: Check formatted codebase 
         run: |
-          deno fmt --check examples/
-          deno fmt --check index.ts
+          deno fmt --check mod.ts
+          deno fmt --check badge_test.ts
+      - name: Run tests
+        run: deno test badge_test.ts
       - name: Run examples/
         run: |
           deno run examples/simple.ts
           deno run examples/medium.ts
+          deno run examples/8_bit.ts

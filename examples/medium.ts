@@ -1,7 +1,7 @@
-import { badges } from "https://deno.land/x/cli_badges@v0.0.4/index.ts";
+import { badge } from "../mod.ts";
 
-console.log(badges("failed", "2", { msgBg: "red" }));
+console.log(badge("failed", "2", { msgBg: "red" }), "\n");
 
-console.log(badges("success", "2", { msgBg: "green" }));
+console.log(badge("success", "2", { msgBg: "green" }), "\n");
 
-console.log(badges("skipped", "2", { msgBg: "yellow" }));
+console.log(badge("skipped", "2", { msgBg: "yellow" }), "\n");

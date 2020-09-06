@@ -1,6 +1,6 @@
 import * as color from "https://deno.land/std@0.67.0/fmt/colors.ts";
 
-/** @type Color is the sum types of available colors */
+/** @type Color is the sum type of all available colors */
 export type Color =
   | number
   | "black"
@@ -20,7 +20,7 @@ export type Color =
   | "brightCyan"
   | "brightWhite";
 
-/** @type Style is the sum types of available styles */
+/** @type Style is the sum type of all available styles */
 export type Style =
   | "italic"
   | "underline"
@@ -38,16 +38,16 @@ export type StyleType = { [s in Style]: (str: string) => string };
 /** 
  * @interface BadgeOptions is an interface which is configuartion 
  * for the formation of the `badge`.
- * @property msgBg - Bg of the msg. Default: `brightBlack`.
- * @property labelBg - Bg of the label. Default: `blue`.
- * @property msgColor - Text Color of the msg. Default: `white`.
- * @property labelColor - Text Color of the label. Default: `white`.
- * @property msgStyle - Style of the msg. Default: `null`.
- * @property labelStyle - Style of the label. Default: `null`.
- * @property msgWidth - Width of the msg. Default: `msg.length + 2`.
- * @property labelWidth - Width of the label. Default: `label.length + 2`.
- * @property is_8bit - Flag for allowing 8 bit Colors. Default: `false`.
- * @property hyper_link - Hyperlink of the badge. Default: `null`.
+ * @property msgBg - Bg of the msg. Default: `brightBlack`
+ * @property labelBg - Bg of the label. Default: `blue`
+ * @property msgColor - Text Color of the msg. Default: `white`
+ * @property labelColor - Text Color of the label. Default: `white`
+ * @property msgStyle - Style of the msg. Default: `null`
+ * @property labelStyle - Style of the label. Default: `null`
+ * @property msgWidth - Width of the msg. Default: `msg.length + 2`
+ * @property labelWidth - Width of the label. Default: `label.length + 2`
+ * @property is_8bit - Flag for allowing 8 bit Colors. Default: `false`
+ * @property hyper_link - Hyperlink of the badge. Default: `null`
 */
 export interface BadgeOptions {
   msgBg: Color;
@@ -166,19 +166,24 @@ function format(
 ): string {
   if (!StyleName) return str;
 
-  const Styleter = styleTypes[StyleName];
-  if (Styleter) {
-    return Styleter(str);
+  const Styler = styleTypes[StyleName];
+  if (Styler) {
+    return Styler(str);
   }
   return str;
 }
 
 /** @function hyperlink makes a hyperlink */
 function hyperlink(url: string, text: string): string {
-  return `\u001B]8;;${url}\u0007${text}\u001B]8;;\u0007`;
+  return `\u001B]8;; ${url} \u0007 ${text}\u001B]8;;\u0007`;
 }
 
-/** @var DEFAULT_OPTIONS are the default args passed to @function badge */
+/** @var DEFAULT_OPTIONS are the default args passed to @function `badge` 
+ * @property msgBg: `blue`
+ * @property labelBg: `brightBlack`
+ * @property msgColor: `white`
+ * @property labelColor: `white`
+*/
 export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
   msgBg: "blue",
   labelBg: "brightBlack",
@@ -189,7 +194,7 @@ export const DEFAULT_OPTIONS: Partial<BadgeOptions> = {
 /** @function badge returns the `string` repr of the `badge` 
  * @param label - label of the badge.
  * @param msg - message of the badge.
- * @param opts - options for the @interface BadgeOptions of the badge.
+ * @param opts - options for the @interface BadgeOptions of the badge. Default: @var DEFAULT_OPTIONS
 */
 export function badge(
   label = "",

@@ -237,13 +237,57 @@ Deno.test("Inverse", function (): void {
   );
 });
 
+Deno.test("Dim", function (): void {
+  assertEquals(
+    badge("foo", "", { labelStyle: "dim" }),
+    "\u001b[2m\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[22m ",
+  );
+  assertEquals(
+    badge("foo", "bar", { labelStyle: "dim", msgStyle: "dim" }),
+    "\u001b[2m\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[22m\u001b[2m\u001b[37m\u001b[44m bar \u001b[49m\u001b[39m\u001b[22m ",
+  );
+});
+
+Deno.test("Strike", function (): void {
+  assertEquals(
+    badge("foo", "", { labelStyle: "strike" }),
+    "\u001b[9m\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[29m ",
+  );
+  assertEquals(
+    badge("foo", "bar", { labelStyle: "strike", msgStyle: "strike" }),
+    "\u001b[9m\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[29m\u001b[9m\u001b[37m\u001b[44m bar \u001b[49m\u001b[39m\u001b[29m ",
+  );
+});
+
+Deno.test("Underline", function (): void {
+  assertEquals(
+    badge("foo", "", { labelStyle: "underline" }),
+    "\u001b[4m\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[24m ",
+  );
+  assertEquals(
+    badge("foo", "bar", { labelStyle: "underline", msgStyle: "underline" }),
+    "\u001b[4m\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[24m\u001b[4m\u001b[37m\u001b[44m bar \u001b[49m\u001b[39m\u001b[24m ",
+  );
+});
+
+Deno.test("8 bit", function (): void {
+  assertEquals(
+    badge("foo", "", { labelColor: 0x34, is_8bit: true }),
+    "\u001b[38;5;52m\u001b[100m foo \u001b[49m\u001b[39m ",
+  );
+  assertEquals(
+    badge("foo", "bar", { labelColor: 0x34, is_8bit: true, msgColor: 0x32 }),
+    "\u001b[38;5;52m\u001b[100m foo \u001b[49m\u001b[39m\u001b[38;5;50m\u001b[44m bar \u001b[49m\u001b[39m ",
+  );
+});
+
 Deno.test("Hyperlink", function (): void {
   assertEquals(
     badge("foo", "", { hyper_link: "https://github.com/" }),
-    "\u001b]8;;https://github.com/\u0007\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m \u001b]8;;\u0007",
+    "\u001b]8;; https://github.com/ \u0007 \u001b[37m\u001b[100m foo \u001b[49m\u001b[39m \u001b]8;;\u0007",
   );
   assertEquals(
     badge("foo", "bar", { hyper_link: "https://github.com/" }),
-    "\u001b]8;;https://github.com/\u0007\u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[37m\u001b[44m bar \u001b[49m\u001b[39m \u001b]8;;\u0007",
+    "\u001b]8;; https://github.com/ \u0007 \u001b[37m\u001b[100m foo \u001b[49m\u001b[39m\u001b[37m\u001b[44m bar \u001b[49m\u001b[39m \u001b]8;;\u0007",
   );
 });

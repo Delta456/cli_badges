@@ -19,7 +19,7 @@ jobs:
           deno-version: ${{ matrix.deno }}
       - name: Check formatted codebase 
         run: |
-          deno fmt --check index.ts
+          deno fmt --check mod.ts
           deno fmt --check badge_test.ts
       - name: Run tests
         run: deno test badge_test.ts

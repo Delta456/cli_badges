@@ -13,10 +13,14 @@ Generate Badges for your CLI.
 - Variety of colors to choose from 🎨
 - Written in TS with Deno 🦕
 
+## Warning ⚠️
+
+If your terminal has a custom theme then the colors will blend according to your configuration which can cause unwanted results.
+
 ## Usage
 
 ```ts
-import { badge } from "https://deno.land/x/cli_badges@v0.1.0/mod.ts";
+import { badge } from "https://deno.land/x/cli_badges@v0.1.1/mod.ts";
 
 console.log(badge("failed", "2", { msgBg: "red" }));
 

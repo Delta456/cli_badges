@@ -1,4 +1,4 @@
-import * as color from "https://deno.land/std@0.67.0/fmt/colors.ts";
+import * as color from "https://deno.land/std@0.69.0/fmt/colors.ts";
 
 /** @type Color is the sum type of all available colors */
 export type Color =
@@ -30,10 +30,10 @@ export type Style =
   | "strike";
 
 /** @type ColorType is a map of @type Color and `(str:string) => string` */
-export type ColorType = { [c in Color]: (str: string) => string };
+type ColorType = { [c in Color]: (str: string) => string };
 
 /** @type StyleType is a map of @type Style and `(str:string) => string` */
-export type StyleType = { [s in Style]: (str: string) => string };
+type StyleType = { [s in Style]: (str: string) => string };
 
 /** 
  * @interface BadgeOptions is an interface which is configuartion 
@@ -175,6 +175,7 @@ function format(
 
 /** @function hyperlink makes a hyperlink */
 function hyperlink(url: string, text: string): string {
+  // spaces because some terminals may mismatch the link
   return `\u001B]8;; ${url} \u0007 ${text}\u001B]8;;\u0007`;
 }
 

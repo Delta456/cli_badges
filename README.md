@@ -4,7 +4,7 @@ Generate Badges for your CLI.
 
 [![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/cli_badges)  [![deno version](https://img.shields.io/badge/deno-^1.3.2-lightgrey?logo=deno)](https://github.com/denoland/deno) [![GitHub release](https://img.shields.io/github/release/Delta456/cli_badges.svg)](https://github.com/Delta456/cli_badges/releases) [![CI](https://github.com/Delta456/cli_badges/workflows/CI/badge.svg)](https://github.com/Delta456/cli_badges/actions?query=workflow%3ACI)
 
-**NOTE**: It is recommended to use update pre-exisiting versions of this module to `^v0.1.0` as there are many breaking changes from this release in the API.
+**NOTE**: It is recommended to update pre-exisiting versions of this module to `^v0.1.0` as there are many breaking changes from this release in the API.
 
 ## Features
 - Make Beautiful Badges for CLI 🤩
@@ -13,11 +13,13 @@ Generate Badges for your CLI.
 - Variety of colors to choose from 🎨
 - Written in TS with Deno 🦕
 
-## Warning ⚠️
-
-If your terminal has a custom theme then the colors will blend according to your configuration which can cause unwanted results.
+> Warning ⚠️: If your terminal has a custom theme then the colors will blend according to your configuration which can cause unwanted results.
 
 ## Usage
+
+### Simple Example
+
+Showcases `failed`, `success` and `skipped` badge on the terminal
 
 ```ts
 import { badge } from "https://deno.land/x/cli_badges@v0.1.1/mod.ts";
@@ -29,11 +31,22 @@ console.log(badge("success", "2", { msgBg: "green" }));
 console.log(badge("skipped", "2", { msgBg: "yellow" }));
 ```
 
-## Output
-
 ![sample_output](img/sample_output.png)
 
-See [examples](./examples/) for more usages
+### Hyperlink Example
+
+The hyperlink will only work if [supported](https://github.com/Delta456/cli_badges#hyperlink-support).
+
+```ts
+import { badge } from "https://deno.land/x/cli_badges@v0.1.1/mod.ts";
+
+console.log(badge('❤️ donate', 'ko-fi', { hyper_link: 'https://ko-fi.com/logginjs',
+}));
+```
+
+![donate_output](./img/donate_output.png)
+
+For more see [examples](./examples/) for more usages
 
 ## `badge` function
 
@@ -121,7 +134,7 @@ Hyperlink is only supported on [some](https://gist.github.com/egmontkob/eb114294
 
 ## Acknowledgments
 
-I thank the author of [nombrekeff/cli-badges](https://github.com/nombrekeff/cli-badges) for his original implementation in JS wth Node and also helped me with some Deno issues and giving me guidance on this project as this is my first project with TS.
+I thank the author of [nombrekeff/cli-badges](https://github.com/nombrekeff/cli-badges) for his original implementation in JS wth Node and also helped me with some Deno issues and giving me guidance on this project as this is my first project written in TS and Deno.
 
 ## License
 

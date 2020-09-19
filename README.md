@@ -46,7 +46,7 @@ console.log(badge('❤️ donate', 'ko-fi', { hyper_link: 'https://ko-fi.com/log
 
 ![donate_output](./img/donate_output.png)
 
-For more see [examples](./examples/) for more usages
+For more usages, see [examples](./examples/).
 
 ## `badge` function
 

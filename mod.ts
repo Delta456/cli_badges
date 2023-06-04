@@ -1,4 +1,4 @@
-import * as color from "https://deno.land/std@0.69.0/fmt/colors.ts";
+import * as color from "https://deno.land/std@0.190.0/fmt/colors.ts";
 
 /** @type Color is the sum type of all available colors */
 export type Color =
